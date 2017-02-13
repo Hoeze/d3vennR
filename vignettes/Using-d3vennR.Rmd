@@ -1,10 +1,10 @@
 ---
-title: "Introductory Use of d3vennR"
+title: "Venn Diagram"
 author: "Kent Russell"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using d3vennR}
+  %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,7 +17,7 @@ Venn diagrams are certainly not perfect.  However, if you understand their limit
 `d3vennR` is not on CRAN and probably never will be unless someone asks me to submit, so please use `devtools::install_github()` to install.
 
 ```{r eval = FALSE}
-devtools::install_github("timelyportfolio/d3vennR")
+devtools::install_github("martinjhnhadley/d3vennR")
 ```
 
 ## Examples from `venn.js`
