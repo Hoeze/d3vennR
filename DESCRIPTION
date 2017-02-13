@@ -38,14 +38,15 @@ Authors@R: c(
       )
     )
 Maintainer: Martin Hadley <martinjohnhadley@gmail.com>
-Description: Make interactive d3.js Venn/Euler diagrams in R with the convenience and infrastructure
-              of an htmlwidget.
+Description: Make interactive d3.js Venn/Euler diagrams in R with the
+    convenience and infrastructure of an htmlwidget.
 License: MIT + file LICENSE
 LazyData: TRUE
 Imports:
-  htmlwidgets,
-  htmltools,
-  markdown
+    htmlwidgets,
+    htmltools,
+    markdown
 Suggests:
-  knitr
+    knitr
 VignetteBuilder: knitr
+RoxygenNote: 5.0.1
