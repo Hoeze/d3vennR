@@ -34,7 +34,7 @@ Authors@R: c(
         "Martin", "Hadley"
         , role = c("abr", "aut", "cre")
         , comment = "R interface"
-        , email = "kent.russell@timelyportfolio.com"
+        , email = "martinjohnhadley@gmail.com"
       )
     )
 Maintainer: Martin Hadley <martinjohnhadley@gmail.com>
@@ -43,6 +43,8 @@ Description: Make interactive d3.js Venn/Euler diagrams in R with the
 License: MIT + file LICENSE
 LazyData: TRUE
 Imports:
+    VennDiagram,
+    jsonlite,
     htmlwidgets,
     htmltools,
     markdown

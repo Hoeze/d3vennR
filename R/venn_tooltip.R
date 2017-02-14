@@ -2,12 +2,8 @@
 #'
 #' \code{venn_tooltip} is a wrapper for d3vennR which adds a tooltip to the diagram with the size over selected regions shown.
 #'
-#' @import htmlwidgets
-#' @importFrom stats as.formula
-#' @rdname map-stacked-bar-chart
 #' @param venn A \code{d3vennR} object.
 #' @section Warning: This is a wrapper function that should eventually be moved to an internal option of d3
-#'
 #' @export
 venn_tooltip <- function(venn){
 venn$x$tasks[length(venn$x$tasks)+1] <- list(

@@ -1,38 +1,10 @@
----
-title: "Venn Diagram"
-author: "Kent Russell"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
+## ----eval = FALSE--------------------------------------------------------
+#  devtools::install_github("martinjhnhadley/d3vennR")
 
-
-Venn diagrams are certainly not perfect.  However, if you understand their limitations, Venn (Euler) diagrams can provide a useful way to provide context and overview.  [`venn.js`](https://github.com/benfred/venn.js) from [Ben Frederickson](http://www.benfrederickson.com) makes creating Venn diagrams easy by doing the math to layout the sets and leveraging `d3.js` for rendering and interactivity.
-
-## Install
-
-`d3vennR` is not on CRAN and probably never will be unless someone asks me to submit, so please use `devtools::install_github()` to install.
-
-```{r eval = FALSE}
-devtools::install_github("martinjhnhadley/d3vennR")
-```
-
-## Examples from `venn.js`
-
-The examples included with `venn.js` give us a perfect starting point to see how to make these diagrams in `R` with `d3vennR`.  I am sure you will quickly learn that possibly the hardest part of creating a Venn diagram is determining the sets and their overlaps.  If you ask/demand, then I might get motivated to add a helper function to the library.  For now, we'll just use the friendly pre-computed data provided for us.
-
-Of course, we'll need `d3vennR`.
-
-```{r}
+## ------------------------------------------------------------------------
 library("d3vennR")
-```
 
-### [Simple layout](https://github.com/benfred/venn.js#simple-layout) from venn.js Readme.md
-
-```{r}
+## ------------------------------------------------------------------------
 d3vennR(
   data = list(
     list( sets = list("A"), size = 12 )
@@ -40,11 +12,8 @@ d3vennR(
     , list( sets = c("A", "B"), size = 2)
   )
 )
-```
 
-### [Changing the Style](https://github.com/benfred/venn.js#changing-the-style) from venn.js Readme.md
-
-```{r}
+## ------------------------------------------------------------------------
 styled_venn <- d3vennR(
   # data from venn.js examples
   #   https://github.com/benfred/venn.js/blob/master/examples/medical.jsonp
@@ -85,9 +54,8 @@ d3.select(this).selectAll(".venn-circle text")
   )
 )
 styled_venn
-```
 
-```{r}
+## ------------------------------------------------------------------------
 styled_venn_inverted <- styled_venn
 styled_venn_inverted$x$tasks <- list(
   htmlwidgets::JS('
@@ -101,9 +69,8 @@ d3.select(this).selectAll("text")
   ')
 )
 styled_venn_inverted
-```
 
-```{r}
+## ------------------------------------------------------------------------
 styled_venn_mono <- styled_venn
 styled_venn_mono$x$tasks <- list(
   htmlwidgets::JS('
@@ -119,9 +86,8 @@ function(){
   ')
 )
 styled_venn_mono
-```
 
-```{r}
+## ------------------------------------------------------------------------
 styled_venn_dropshadow <- styled_venn
 styled_venn_dropshadow$x$tasks <- list(
   htmlwidgets::JS('
@@ -161,15 +127,9 @@ function(){
   ')
 )
 styled_venn_dropshadow
-```
 
-
-## [Adding tooltips](https://github.com/benfred/venn.js#adding-tooltips) from venn.js Readme.md
-
-Tooltips would be a great place for a helper function.  This helper function is currently not in the package, but we could define one like below.  Of course, there is lots of room for improvement here.
-
-```{r}
-venn_tooltip <- function( venn ){
+## ------------------------------------------------------------------------
+venn_tooltip_local <- function( venn ){
   venn$x$tasks[length(venn$x$tasks)+1] <- list(
       htmlwidgets::JS('
 function(){
@@ -231,10 +191,9 @@ div.selectAll("g")
   )
   venn
 }
-```
 
-```{r}
-venn_tooltip(d3vennR(
+## ------------------------------------------------------------------------
+venn_tooltip_local(d3vennR(
   # data from venn.js examples
   #   https://github.com/benfred/venn.js/blob/master/examples/lastfm.jsonp
   data = list(
@@ -342,14 +301,8 @@ venn_tooltip(d3vennR(
     list("sets"= list(2, 7, 8), "size"= 72)
   )
 ))
-```
 
-
-## [MDS Layout](https://github.com/benfred/venn.js#mds-layout) from venn.js Readme.md
-
-See this [blog post](http://www.benfrederickson.com/multidimensional-scaling/) from more on when to use the `MDS layout`.
-
-```{r}
+## ------------------------------------------------------------------------
 d3vennR(
   data = list(
     list(sets= list('A'), size= 9),
@@ -378,16 +331,8 @@ d3vennR(
 function(d) { return venn.venn(d, { initialLayout: venn.classicMDSLayout });}
   '
 )
-```
 
-
-## Example from VennDiagram R package
-
-As usual with `R`, a lot has been done before.  Let's "recreate" some of the examples from [`VennDiagram`](cran.r-project.org/web/packages/VennDiagram/).
-
-### `draw.triple.venn`
-
-```{r}
+## ------------------------------------------------------------------------
 library("VennDiagram")
 grid.newpage()
 grid.draw(draw.triple.venn(
@@ -405,10 +350,9 @@ grid.draw(draw.triple.venn(
 	cat.cex = 2,
 	cat.col = c("blue", "red", "green")
 ))
-```
 
-```{r}
-venn_tooltip(
+## ------------------------------------------------------------------------
+venn_tooltip_local(
   d3vennR(
     data = list(
     	list( sets = list("First"), size = 65),
@@ -421,11 +365,8 @@ venn_tooltip(
     )
   )
 )
-```
 
-
-### `draw.quintuple.venn`
-```{r}
+## ------------------------------------------------------------------------
 library("VennDiagram")
 grid.newpage()
 grid.draw(draw.quintuple.venn(
@@ -469,10 +410,9 @@ grid.draw(draw.quintuple.venn(
           1, 0.55, 1, 0.55, 1, 0.55, 1, 0.55, 1, 0.55, 1, 1, 1, 1, 1, 1.5),
   ind = TRUE
 ))
-```
 
-```{r}
-venn_tooltip(d3vennR(
+## ------------------------------------------------------------------------
+venn_tooltip_local(d3vennR(
   data = list(
     list(sets = list("A"), size = 301),
     list(sets = list("B"), size = 321),
@@ -523,14 +463,4 @@ d3.scale.category10().range(%s.map(function(col){return eval(col)}))
 function(d) { return venn.venn(d, { initialLayout: venn.classicMDSLayout });}
   '
 ))
-```
-
-## Thanks
-
-Thanks so much
-
-- Ben Frederickson for [venn.js](https://github.com/benfred/venn.js) on which this is based
-- [`d3.js`](http://d3js.org) from Mike Bostock
-- Ramnath Vaidyanathan and RStudio for `htmlwidgets`
-- all the contributors to `R` and `JavaScript`
 
