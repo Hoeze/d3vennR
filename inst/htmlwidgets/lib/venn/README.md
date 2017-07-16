@@ -1,16 +1,24 @@
-venn.js
+venn.js [![Build Status](https://travis-ci.org/benfred/venn.js.svg?branch=master)](https://travis-ci.org/benfred/venn.js)
 =======
 
 A javascript library for laying out area proportional venn and euler diagrams.
 
-Details of how this library works can be found on the [blog
+Details of how this library works can be found on the [blog 
 post](http://www.benfrederickson.com/venn-diagrams-with-d3.js/)
-I wrote about this.
+I wrote about this. A follow up post [discusses testing strategy and
+algorithmic improvements](http://www.benfrederickson.com/better-venn-diagrams/).
 
-#### Usage
+
+### Installing
+
+If you use NPM, `npm install venn.js`. Otherwise, download the [latest release](https://github.com/benfred/venn.js/releases/latest).
+
+
+### Usage
 
 This library depends on [d3.js](http://d3js.org/) to display the venn
 diagrams.
+
 
 ##### Simple layout
 
@@ -18,7 +26,7 @@ To lay out a simple diagram, just define the sets and their sizes along with the
 of all the set intersections.
 
 The VennDiagram object will calculate a layout that is proportional to the
-input sizes, and display it in the appropiate selection when called:
+input sizes, and display it in the appropriate selection when called:
 
 ```javascript
 var sets = [ {sets: ['A'], size: 12}, 
@@ -103,7 +111,7 @@ div.datum(sets).call(venn.VennDiagram());
 var tooltip = d3.select("body").append("div")
     .attr("class", "venntooltip");
 
-// add listeners to all the groups to display tooltip on mousover
+// add listeners to all the groups to display tooltip on mouseover
 div.selectAll("g")
     .on("mouseover", function(d, i) {
         // sort all the areas relative to the current item
@@ -136,40 +144,5 @@ div.selectAll("g")
     });
 ```
 [View this example](http://benfred.github.io/venn.js/examples/intersection_tooltip.html)
-
-##### MDS Layout
-
-In most cases the greedy initial layout does a good job of positioning the
-sets, but there are cases where it breaks down. One case is detailed in [this
-blog post](http://www.benfrederickson.com/2013/05/16/multidimensional-scaling.html),
-and it can be better laid out using [multidimensional
-scaling](https://en.wikipedia.org/wiki/Multidimensional_scaling) to generate
-the initial layout.
-
-To enable this just include the [mds.js](http://github.com/benfred/mds.js)
-and [numeric.js](http://numericjs.com) libraries first, and then change the 
-layout function on the VennDiagam object:
-
-```javascript
-var chart = venn.VennDiagram()
-                 .width(600)
-                 .height(400)
-                 .layoutFunction(
-                    function(d) { return venn.venn(d, { initialLayout: venn.classicMDSLayout });}
-                );
-
-d3.select("#venn").datum(sets).call(chart);
-```
-
-[View this example](http://benfred.github.io/venn.js/examples/mds.html)
-
-#### Building
-
-To build venn.js and venn.min.js from the files in src/ - you should first
-install [grunt](http://gruntjs.com/) by  following [these instructions](http://gruntjs.com/getting-started).
-
-Once you have grunt installed, running 'npm install' in the source directory will download all the
-dev dependencies, and then running 'grunt' will concat all the source files,
-minify them, and run jshint and the unittests.
 
 Released under the MIT License.
