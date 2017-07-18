@@ -11,4 +11,3 @@ d3vennR(data = NULL, padding = NULL, colours = NULL, fontSize = NULL,
 \description{
 <Add Description>
 }
-
